@@ -234,6 +234,8 @@ void curr_obj_random_blink(s32 *blinkTimer) {
 
 void bhv_bobomb_loop(void) {
     s8 dustPeriodMinus1;
+    o->OBJECT_FIELD_F32(0x1E) += o->oBobombFuseTimer / 105.f;
+    o->oOpacity = sinf(o->OBJECT_FIELD_F32(0x1E)) * 75;
 
     if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
         switch (o->oHeldState) {
@@ -285,20 +287,12 @@ void bhv_bobomb_fuse_smoke_init(void) {
 void bhv_bobomb_buddy_init(void) {
     o->oGravity = 2.5f;
     o->oFriction = 0.8f;
-    o->oBuoyancy = 1.3f;
+    o->oBuoyancy = 0.0f;
     o->oInteractionSubtype = INT_SUBTYPE_NPC;
 }
 
 void bobomb_buddy_act_idle(void) {
-    s16 animFrame = o->header.gfx.animInfo.animFrame;
-
-    // vec3f_copy(&o->oBobombBuddyPosCopyVec, &o->oPosVec);
-
     object_step();
-
-    if (animFrame == 5 || animFrame == 16) {
-        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
-    }
 
     if (o->oDistanceToMario < 1000.0f) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
@@ -391,12 +385,6 @@ void bobomb_buddy_act_talk(void) {
 }
 
 void bobomb_buddy_act_turn_to_talk(void) {
-    s16 animFrame = o->header.gfx.animInfo.animFrame;
-
-    if (animFrame == 5 || animFrame == 16) {
-        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
-    }
-
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
 
     if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {

@@ -1,3 +1,4 @@
+#include "src/game/texscroll.h"
 #include <PR/ultratypes.h>
 
 #include "audio/external.h"
@@ -59,24 +60,20 @@ static s32 sActSelectorMenuTimer = 0;
  */
 void bhv_act_selector_star_type_loop(void) {
     switch (gCurrentObject->oStarSelectorType) {
-        // If a star is not selected, don't rotate or change size
+        // If a star is not selected, don't change size
         case STAR_SELECTOR_NOT_SELECTED:
-            gCurrentObject->oStarSelectorSize -= 0.1f;
-            if (gCurrentObject->oStarSelectorSize < 1.0f) {
-                gCurrentObject->oStarSelectorSize = 1.0f;
+            gCurrentObject->oStarSelectorSize -= 1.0f;
+            if (gCurrentObject->oStarSelectorSize < 1.25f) {
+                gCurrentObject->oStarSelectorSize = 1.25f;
             }
-            gCurrentObject->oFaceAngleYaw = 0;
+            gCurrentObject->oFaceAngleYaw += 0x200;
             break;
-        // If a star is selected, rotate and slightly increase size
+        // If a star is selected, slightly increase size
         case STAR_SELECTOR_SELECTED:
-            gCurrentObject->oStarSelectorSize += 0.1f;
-            if (gCurrentObject->oStarSelectorSize > 1.3f) {
-                gCurrentObject->oStarSelectorSize = 1.3f;
+            gCurrentObject->oStarSelectorSize += 1.0f;
+            if (gCurrentObject->oStarSelectorSize > 2.0f) {
+                gCurrentObject->oStarSelectorSize = 2.0f;
             }
-            gCurrentObject->oFaceAngleYaw += 0x800;
-            break;
-        // If the 100 coin star is selected, rotate
-        case STAR_SELECTOR_100_COINS:
             gCurrentObject->oFaceAngleYaw += 0x800;
             break;
     }
@@ -87,34 +84,9 @@ void bhv_act_selector_star_type_loop(void) {
 }
 
 /**
- * Renders the 100 coin star with an special star selector type.
- */
-void render_100_coin_star(u8 stars) {
-    if (stars & STAR_FLAG_ACT_100_COINS) {
-        // If the 100 coin star has been collected, create a new star selector next to the coin score.
-    #ifdef WIDE
-        if (gConfig.widescreen) {
-            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                            bhvActSelectorStarType, (370 * 4.0f) / 3, 24, -300, 0, 0, 0);
-        } else {
-            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                            bhvActSelectorStarType, 370, 24, -300, 0, 0, 0);
-        }
-    #else
-        sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                        bhvActSelectorStarType, 370, 24, -300, 0, 0, 0);
-    #endif
-
-        sStarSelectorModels[6]->oStarSelectorSize = 0.8f;
-        sStarSelectorModels[6]->oStarSelectorType = STAR_SELECTOR_100_COINS;
-    }
-}
-
-/**
  * Act Selector Init Action
  * Checks how many stars has been obtained in a course, to render
- * the correct star models, the 100 coin star and also handles
- * checks of what star should be next in sInitSelectedActNum.
+ * the correct star models.
  */
 void bhv_act_selector_init(void) {
     s16 i = 0;
@@ -158,32 +130,12 @@ void bhv_act_selector_init(void) {
     }
 
     // Render star selector objects
-#ifdef WIDE
-    if (gConfig.widescreen) {
-        for (i = 0; i < sVisibleStars; i++) {
-            sStarSelectorModels[i] =
-                spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                        ((75 + (sVisibleStars * -75) + (i * 152)) * 4.0f) / 3, 248, -300, 0, 0, 0);
-            sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
-        }
-    } else {
-        for (i = 0; i < sVisibleStars; i++) {
-            sStarSelectorModels[i] =
-                spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                        (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
-            sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
-        }
-    }
-#else
     for (i = 0; i < sVisibleStars; i++) {
         sStarSelectorModels[i] =
             spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                    (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
+            (105 + (sVisibleStars * -105) + (i * 200)), 0, -275, 0, 0, 0);
         sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
     }
-#endif
-
-    render_100_coin_star(stars);
 }
 
 /**
@@ -239,12 +191,6 @@ void print_course_number(s16 language) {
 void print_course_number(void) {
 #endif
     u8 courseNum[4];
-
-    create_dl_translation_matrix(MENU_MTX_PUSH, 158.0f, 81.0f, 0.0f);
-
-    // Full wood texture in JP & US, lower part of it on EU
-    gSPDisplayList(gDisplayListHead++, dl_menu_rgba16_wood_course);
-
 #if MULTILANG
     // Change upper part of the wood texture depending of the language defined
     switch (language) {
@@ -269,9 +215,9 @@ void print_course_number(void) {
     int_to_str(gCurrCourseNum, courseNum);
 
     if (gCurrCourseNum < 10) { // 1 digit number
-        print_hud_lut_string(HUD_LUT_GLOBAL, 152, 158, courseNum);
+        print_hud_lut_string(HUD_LUT_GLOBAL, 25, 55, courseNum);
     } else { // 2 digit number
-        print_hud_lut_string(HUD_LUT_GLOBAL, 143, 158, courseNum);
+        print_hud_lut_string(HUD_LUT_GLOBAL, 22, 55, courseNum);
     }
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
@@ -333,28 +279,29 @@ void print_act_selector_strings(void) {
     // Print the coin highscore.
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-    print_hud_my_score_coins(1, gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 155, 106);
+    print_hud_my_score_coins(1, gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 155, 200);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // Print the "MY SCORE" text if the coin score is more than 0
     if (save_file_get_course_coin_score(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) != 0) {
 #if MULTILANG
-        print_generic_string(95, 118, myScore[language]);
+        print_generic_string(95, 20, myScore[language]);
 #else
-        print_generic_string(102, 118, myScore);
+        print_generic_string(105, 23, myScore);
 #endif
     }
-
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
 #if MULTILANG
-    print_generic_string(get_str_x_pos_from_center(160, (currLevelName + 3), 10.0f), 33, currLevelName + 3);
+    print_hud_lut_string(get_str_x_pos_from_center(120, (currLevelName + 3), 10.0f), 40, currLevelName + 3);
 #else
-    lvlNameX = get_str_x_pos_from_center(160, currLevelName + 3, 10.0f);
-    print_generic_string(lvlNameX, 33, currLevelName + 3);
+    lvlNameX = get_str_x_pos_from_center(120, currLevelName + 3, 10.0f);
+    print_hud_lut_string(HUD_LUT_DIFF, lvlNameX, 55, currLevelName + 3);
 #endif
-
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
 #if MULTILANG
     print_course_number(language);
@@ -363,7 +310,7 @@ void print_act_selector_strings(void) {
 #endif
 
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // Print the name of the selected act.
     if (sVisibleStars != 0) {
         selectedActName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + sSelectedActIndex]);
@@ -371,21 +318,10 @@ void print_act_selector_strings(void) {
 #if MULTILANG
         print_menu_generic_string(get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 8.0f), 81, selectedActName);
 #else
-        actNameX = get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 8.0f);
-        print_menu_generic_string(actNameX, 81, selectedActName);
+        actNameX = get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 0);
+        print_menu_generic_string(actNameX, 170, selectedActName);
 #endif
     }
-
-    // Print the numbers above each star.
-    for (i = 1; i <= sVisibleStars; i++) {
-        starNumbers[0] = i;
-#if MULTILANG
-        print_menu_generic_string(143 - sVisibleStars * 15 + i * 30, 38, starNumbers);
-#else
-        print_menu_generic_string(139 - sVisibleStars * 17 + i * 34, 38, starNumbers);
-#endif
-    }
-
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
  }
 
@@ -401,7 +337,6 @@ Gfx *geo_act_selector_strings(s16 callContext, UNUSED struct GraphNode *node, UN
 
 /**
  * Initiates act selector values before entering a main course.
- * Also load how much stars a course has, without counting the 100 coin star.
  */
 s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
     u8 stars = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
@@ -411,7 +346,7 @@ s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
     sVisibleStars = 0;
     sActSelectorMenuTimer = 0;
     sObtainedStars =
-        save_file_get_course_star_count(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
+    save_file_get_course_star_count(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
     // Don't count 100 coin star
     if (stars & STAR_FLAG_ACT_100_COINS) {
@@ -428,7 +363,7 @@ s32 lvl_init_act_selector_values_and_stars(UNUSED s32 arg, UNUSED s32 unused) {
 s32 lvl_update_obj_and_load_act_button_actions(UNUSED s32 arg, UNUSED s32 unused) {
     if (sActSelectorMenuTimer > 10) {
         // If any of these buttons are pressed, play sound and go to course act
-        if ((gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | B_BUTTON | Z_TRIG))) {
+        if ((gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON))) {
             play_sound(SOUND_MENU_STAR_SOUND_LETS_A_GO, gGlobalSoundSource);
 #if ENABLE_RUMBLE
             queue_rumble_data(60, 70);
@@ -443,7 +378,7 @@ s32 lvl_update_obj_and_load_act_button_actions(UNUSED s32 arg, UNUSED s32 unused
         }
     }
 
-    area_update_objects();
+    area_update_objects(); scroll_textures();
     sActSelectorMenuTimer++;
     return sLoadedActNum;
 }

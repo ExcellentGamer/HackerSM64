@@ -21,6 +21,7 @@ extern Texture texture_transition_bowser_half[];
 extern Texture texture_waterbox_water[];
 extern Texture texture_waterbox_mist[];
 extern Texture texture_waterbox_jrb_water[];
+extern Texture texture_waterbox_castle_water[];
 extern Texture texture_waterbox_unknown_water[];
 extern Texture texture_waterbox_lava[];
 extern Gfx dl_proj_mtx_fullscreen[];
@@ -66,13 +67,7 @@ extern Gfx dl_billboard_num_6[];
 extern Gfx dl_billboard_num_7[];
 extern Gfx dl_billboard_num_8[];
 extern Gfx dl_billboard_num_9[];
-#ifdef DIALOG_INDICATOR
+
 extern Gfx dl_billboard_num_A[];
-extern Gfx dl_billboard_num_B[];
-extern Gfx dl_billboard_num_C[];
-extern Gfx dl_billboard_num_D[];
-extern Gfx dl_billboard_num_E[];
-extern Gfx dl_billboard_num_F[];
-#endif
 
 #endif // SEGMENT2_H

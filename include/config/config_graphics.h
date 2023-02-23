@@ -8,10 +8,10 @@
 #define GFX_POOL_SIZE 10000
 
 // Show a watermark on the title screen that reads "Made with HackerSM64", instead of the copyright message.
-#define INTRO_CREDIT
+// #define INTRO_CREDIT
 
 // Spawns floombas on the title screen.
-#define INTRO_FLOOMBAS
+// #define INTRO_FLOOMBAS
 
 // Enables widescreen (16:9) support.
 #define WIDE
@@ -72,7 +72,7 @@
 
 // Lightweight directional lighting engine by Fazana. Intended for giving proximity and positional pointlights to small objects.
 // NOTE: Still breaks occasionally, and PUPPYLIGHT_NODE might not work in areas that aren't area 1.
-// #define PUPPYLIGHTS
+#define PUPPYLIGHTS
 
 // Uses the correct "up" vector for the guLookAtReflect call in geo_process_master_list_sub.
 // It is sideways in vanilla, and since vanilla's environment map textures are sideways too, those will appear as sideways in-game if this is enabled.

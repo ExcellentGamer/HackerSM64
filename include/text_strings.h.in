@@ -158,6 +158,7 @@
 #define TEXT_MYSCORE _("マイスコア")
 #define TEXT_CONTINUE _("つづけて　マリオする？")
 #define TEXT_EXIT_COURSE _("コースからでる？")
+//#define TEXT_EXIT_TO_CASTLE _("城への出口")
 #define TEXT_CAMERA_ANGLE_R _("Ｒボタンのカメラきりかえ")
 
 // Camera Options
@@ -256,6 +257,7 @@
 #define TEXT_MYSCORE _("MYSCORE")
 #define TEXT_CONTINUE _("CONTINUE")
 #define TEXT_EXIT_COURSE _("EXIT COURSE")
+//#define TEXT_EXIT_TO_CASTLE _("EXIT TO CASTLE")
 #ifndef VERSION_EU // "R" text is different in EU
 #define TEXT_CAMERA_ANGLE_R _("SET CAMERA ANGLE WITH R")
 #endif
@@ -401,12 +403,14 @@
 #define TEXT_MY_SCORE_FR                _("MON SCORE")
 #define TEXT_CONTINUE_FR                _("CONTINUER")
 #define TEXT_EXIT_COURSE_FR             _("QUITTER NIVEAU")
+//#define TEXT_EXIT_TO_CASTLE_FR          _("SORTIE AU CHÂTEAU")
 #define TEXT_CAMERA_ANGLE_R_FR          _("RÉGLAGE CAMÉRA AVEC [R]")
 // German
 #define TEXT_COURSE_DE                  _("KURS")
 #define TEXT_MY_SCORE_DE                _("LEISTUNG")
 #define TEXT_CONTINUE_DE                _("WEITER")
 #define TEXT_EXIT_COURSE_DE             _("KURS VERLASSEN")
+//#define TEXT_EXIT_TO_CASTLE_DE          _("AUSGANG ZUM SCHLOSS")
 #define TEXT_CAMERA_ANGLE_R_DE          _("KAMERA MIT [R] VERSTELLEN")
 
 // Camera Options
@@ -458,7 +462,7 @@
 /**
  * Course Table names for Score Menu Save view
  */
-#define TEXT_MENU_BOB _(" 1 BOB-OMB BATTLEFIELD")
+#define TEXT_MENU_BOB _(" 1 BOBOMB BATTLEFIELD")
 #define TEXT_MENU_WF _(" 2 WHOMP'S FORTRESS")
 #define TEXT_MENU_JRB _(" 3 JOLLY ROGER BAY")
 #define TEXT_MENU_CCM _(" 4 COOL, COOL MOUNTAIN")

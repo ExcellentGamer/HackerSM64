@@ -2351,3 +2351,29 @@ void cur_obj_spawn_star_at_y_offset(f32 targetX, f32 targetY, f32 targetZ, f32 o
     spawn_default_star(targetX, targetY, targetZ);
     o->oPosY = objectPosY;
 }
+
+Gfx *geo_obj_opacity_as_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *gfxHead = NULL;
+    Gfx *gfx;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        struct GraphNodeGenerated *currentGraphNode = (struct GraphNodeGenerated *) node;
+        struct Object *heldObject = (struct Object *) gCurGraphNodeObject;
+        struct Object *obj = (struct Object *) node;
+        s32 parameter = currentGraphNode->parameter;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            heldObject = gCurGraphNodeHeldObject->objNode;
+        }
+
+        gfxHead = alloc_display_list(3 * sizeof(Gfx));
+        gfx = gfxHead;
+        SET_GRAPH_NODE_LAYER(obj->header.gfx.node.flags, LAYER_ALPHA);
+
+        gDPSetEnvColor(gfx++, 255, 255, 255, heldObject->oOpacity);
+
+        gSPEndDisplayList(gfx);
+    }
+
+    return gfxHead;
+}

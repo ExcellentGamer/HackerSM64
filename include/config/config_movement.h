@@ -18,7 +18,7 @@
 // - Doesn't require holding down the A button.
 // - Precise turning control.
 // - Prevents falling from the edges.
-#define BETTER_HANGING
+#define BETTER_HANGING 1
 
 // Change the movement speed when hanging from a ceiling (the vanilla value is 4.0f, has no effect if BETTER_HANGING is enabled).
 #define HANGING_SPEED 12.0f
@@ -27,7 +27,7 @@
 // #define NO_SLEEP
 
 // Disables fall damage.
-#define NO_FALL_DAMAGE
+// #define NO_FALL_DAMAGE
 
 // Disables the scream that mario makes when falling off a great height (this is separate from actual fall damage).
 // #define NO_FALL_DAMAGE_SOUND
@@ -60,13 +60,13 @@
 #define Z_TWIRL
 
 // Disables bonks when ground pounding next to a wall.
-#define DISABLE_GROUNDPOUND_BONK
+#define DISABLE_GROUNDPOUND_BONK 1
 
 // Allows Mario to jump kick on steep surfaces that are set to be non slippery, instead of being forced to dive.
 #define JUMP_KICK_FIX
 
 // Allows Mario to grab hangable ceilings from any state.
-#define HANGING_FIX
+#define HANGING_FIX 1
 
 // The maximum angle the player can wall kick, in degrees. 0..90. To allow 45 degree wall kicks, you must supply `46` to allow 45 and under.
 #define WALL_KICK_DEGREES 45

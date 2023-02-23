@@ -3,6 +3,9 @@
 
 #include "types.h"
 
+#include "star/geo_header.h"
+#include "transparent_star/geo_header.h"
+
 // blue_fish
 extern const GeoLayout fish_shadow_geo[];
 extern const GeoLayout fish_geo[];
@@ -245,18 +248,6 @@ extern const Gfx dl_breath_meter_health_segments_end[];
 
 // sand
 extern const Gfx sand_seg3_dl_particle[];
-
-// star
-extern const GeoLayout star_geo[];
-extern const Gfx star_seg3_sub_dl_body[];
-extern const Gfx star_seg3_dl_body[];
-extern const Gfx star_seg3_sub_dl_eyes[];
-extern const Gfx star_seg3_dl_eyes[];
-
-// transparent_star
-extern const GeoLayout transparent_star_geo[];
-extern const Gfx transparent_star_seg3_sub_dl_body[];
-extern const Gfx transparent_star_seg3_dl_body[];
 
 // tree
 extern const GeoLayout bubbly_tree_geo[];

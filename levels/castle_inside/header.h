@@ -124,7 +124,7 @@ extern const Gfx inside_castle_seg7_dl_07059190[];
 extern const Gfx inside_castle_seg7_dl_0705E088[];
 extern const Gfx inside_castle_seg7_dl_0705E2A0[];
 extern const Gfx inside_castle_seg7_dl_0705E450[];
-extern const Gfx inside_castle_seg7_dl_070616E8[];
+extern const Gfx inside_castle_seg7_dl_070616E8_inside_castle_seg7_dl_070616E8_mesh[];
 extern const Gfx inside_castle_seg7_dl_07061C20[];
 extern const Gfx inside_castle_seg7_dl_07064B78[];
 extern const Gfx inside_castle_seg7_dl_07064D58[];

@@ -13,7 +13,7 @@ const GeoLayout castle_geo_001958[] = {
 const GeoLayout castle_geo_001980[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
-      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8),
+      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8_inside_castle_seg7_dl_070616E8_mesh),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_07061C20),
       GEO_ASM(   0, geo_painting_update),
       GEO_ASM( PAINTING_ID(4, 1), geo_painting_draw),
@@ -67,7 +67,7 @@ const GeoLayout castle_geo_001A58[] = {
       GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_0705E088),
       GEO_DISPLAY_LIST(LAYER_ALPHA, inside_castle_seg7_dl_0705E2A0),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_0705E450),
-      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8),
+      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8_inside_castle_seg7_dl_070616E8_mesh),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_07061C20),
       GEO_ASM(   0, geo_painting_update),
       GEO_ASM( PAINTING_ID(4, 1), geo_painting_draw),
@@ -112,7 +112,7 @@ const GeoLayout castle_geo_001AF8[] = {
 const GeoLayout castle_geo_001B48[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
-      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8),
+      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8_inside_castle_seg7_dl_070616E8_mesh),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_07061C20),
       GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_07066CE0),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_07066E90),
@@ -131,7 +131,7 @@ const GeoLayout castle_geo_001B48[] = {
 const GeoLayout castle_geo_001BB0[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
-      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8),
+      GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_070616E8_inside_castle_seg7_dl_070616E8_mesh),
       GEO_DISPLAY_LIST(LAYER_TRANSPARENT, inside_castle_seg7_dl_07061C20),
       GEO_DISPLAY_LIST(LAYER_OPAQUE, inside_castle_seg7_dl_07064B78),
       GEO_DISPLAY_LIST(LAYER_ALPHA, inside_castle_seg7_dl_07064D58),

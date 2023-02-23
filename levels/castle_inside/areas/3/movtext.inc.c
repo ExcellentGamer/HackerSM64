@@ -8,8 +8,8 @@ static Movtex inside_castle_movtex_green_room_water_data[] = {
     MOV_TEX_4_BOX_TRIS(  870,  -255),
     MOV_TEX_4_BOX_TRIS(  870, -4146),
     MOV_TEX_ROT(     ROTATE_COUNTER_CLOCKWISE),
-    MOV_TEX_ALPHA(    0x96),
-    MOV_TEX_DEFINE(  TEXTURE_JRB_WATER),
+    MOV_TEX_ALPHA(    75),
+    MOV_TEX_DEFINE(  TEXTURE_CASTLE_WATER),
     MOV_TEX_END(),
 };
 

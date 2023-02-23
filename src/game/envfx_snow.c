@@ -13,6 +13,9 @@
 #include "audio/external.h"
 #include "obj_behaviors.h"
 #include "level_geo.h"
+#include "src/engine/graph_node.h"
+#include "camera.h"
+
 
 /**
  * This file contains the function that handles 'environment effects',

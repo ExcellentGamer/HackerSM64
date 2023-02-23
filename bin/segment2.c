@@ -1900,6 +1900,14 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 #include "textures/segment2/segment2.081D0.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_input_a_up[] = {
+#include "textures/segment2/segment2.input_a_up.rgba16.inc.c"
+};
+
+ALIGNED8 static const Texture texture_input_a_down[] = {
+#include "textures/segment2/segment2.input_a_down.rgba16.inc.c"
+};
+
 // Main HUD print table 0x02008250-0x02008337
 const Texture *const main_hud_lut[] = {
     texture_hud_char_0, texture_hud_char_1, texture_hud_char_2, texture_hud_char_3,
@@ -2138,7 +2146,7 @@ const Texture *const main_credits_font_lut[] = {
 // HUD camera table 0x020087CC-0x020087E3
 const Texture *const main_hud_camera_lut[] = {
     texture_hud_char_camera, texture_hud_char_mario_head, texture_hud_char_lakitu, texture_hud_char_no_camera,
-    texture_hud_char_arrow_up, texture_hud_char_arrow_down,
+    texture_hud_char_arrow_up, texture_hud_char_arrow_down, texture_input_a_up, texture_input_a_down
 };
 
 // If you change the language here, the following Makefile rule also needs to
@@ -2465,61 +2473,15 @@ const Gfx dl_billboard_num_9[] = {
     gsSPEndDisplayList(),
 };
 
-#ifdef DIALOG_INDICATOR
 const Gfx dl_billboard_num_A[] = {
     gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_A),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_input_a_up),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
     gsSPDisplayList(dl_billboard_num_end),
     gsSPEndDisplayList(),
 };
-
-const Gfx dl_billboard_num_B[] = {
-    gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_B),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPDisplayList(dl_billboard_num_end),
-    gsSPEndDisplayList(),
-};
-
-const Gfx dl_billboard_num_C[] = {
-    gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_C),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPDisplayList(dl_billboard_num_end),
-    gsSPEndDisplayList(),
-};
-
-const Gfx dl_billboard_num_D[] = {
-    gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_D),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPDisplayList(dl_billboard_num_end),
-    gsSPEndDisplayList(),
-};
-
-const Gfx dl_billboard_num_E[] = {
-    gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_E),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPDisplayList(dl_billboard_num_end),
-    gsSPEndDisplayList(),
-};
-
-const Gfx dl_billboard_num_F[] = {
-    gsSPDisplayList(dl_billboard_num_begin),
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture_hud_char_F),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, ((16 * 16) - 1), CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPDisplayList(dl_billboard_num_end),
-    gsSPEndDisplayList(),
-};
-#endif
 
 #ifdef HD_SHADOWS
 ALIGNED8 static const Texture texture_shadow_quarter_circle_64[] = {
@@ -2565,6 +2527,10 @@ const Texture texture_waterbox_water[] = {
 
 const Texture texture_waterbox_jrb_water[] = {
 #include "textures/segment2/segment2.12458.rgba16.inc.c"
+};
+
+const Texture texture_waterbox_castle_water[] = {
+#include "textures/segment2/segment2.castle_water.rgba16.inc.c"
 };
 
 const Texture texture_waterbox_unknown_water[] = {
